@@ -43,6 +43,9 @@ jobs:
           cd backend
           ./gradlew lambdaJar
 
+      - name: List JARs
+        run: ls -l backend/build/libs
+
       - name: Install CDK dependencies
         run: |
           cd infrastructure
