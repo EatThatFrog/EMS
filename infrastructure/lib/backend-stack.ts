@@ -12,7 +12,7 @@ export class BackendStack extends Stack {
       runtime: lambda.Runtime.JAVA_17,
       handler: 'com.harshita.ems.StreamLambdaHandler::handleRequest',
       code: lambda.Code.fromAsset(
-        path.join(__dirname, '../../backend/libs/lambda')
+        path.join(__dirname, '../backend/libs/lambda')
       ),
       memorySize: 1024,
       timeout: Duration.seconds(30)
