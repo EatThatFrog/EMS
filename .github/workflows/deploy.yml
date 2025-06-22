@@ -38,13 +38,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build Spring Boot Lambda JAR
+      - name: Build Lambda JAR
         run: |
           cd backend
-          ./gradlew lambdaJar
+          ./gradlew clean lambdaJar
 
-      - name: List JARs
-        run: ls -l backend/build/libs
+      - name: Verify Lambda Artifact
+        run: |
+          ls -lh backend/build/lambda
 
       - name: Install CDK dependencies
         run: |
