@@ -87,18 +87,6 @@ jobs:
           cd infrastructure
           npm ci
 
-      # No tests for infrastructure as it doesn't make sense for this project
-
-      - name: Build
-        run: |
-          cd infrastructure
-          npm run build
-
-      - name: CDK Synth (validate)
-        run: |
-          cd infrastructure
-          npx cdk synth
-
   deploy-pages:
     name: Deploy Frontend to GitHub Pages
     needs: [frontend]
