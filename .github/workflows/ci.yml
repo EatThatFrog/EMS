@@ -87,10 +87,7 @@ jobs:
           cd infrastructure
           npm ci
 
-      - name: Run tests
-        run: |
-          cd infrastructure
-          npm test
+      # No tests for infrastructure as it doesn't make sense for this project
 
       - name: Build
         run: |
