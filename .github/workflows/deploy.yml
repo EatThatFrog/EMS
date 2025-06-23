@@ -38,14 +38,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build Lambda JAR
+      - name: Build Lambda Package
         run: |
           cd backend
-          ./gradlew clean lambdaJar
+          ./gradlew clean build
 
       - name: Verify Lambda Artifact
         run: |
-          ls -lh backend/build/lambda
+          ls -lh backend/build/dist
 
       - name: Install CDK dependencies
         run: |

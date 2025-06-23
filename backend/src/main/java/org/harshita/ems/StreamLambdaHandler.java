@@ -1,5 +1,4 @@
-package org.harshita;
-
+package com.harshita.ems;
 
 import com.amazonaws.serverless.exceptions.ContainerInitializationException;
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
@@ -12,14 +11,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-
 public class StreamLambdaHandler implements RequestStreamHandler {
-    private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+    private static final SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+
     static {
         try {
-            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(Application.class);
+            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(EmployeeManagementBackendApplication.class);
+            // If you need to customize the handler:
+            // handler = new SpringBootProxyHandlerBuilder<AwsProxyRequest>()
+            //         .defaultProxy()
+            //         .springBootApplication(EmployeeManagementBackendApplication.class)
+            //         .buildAndInitialize();
         } catch (ContainerInitializationException e) {
-            // if we fail here. We re-throw the exception to force another cold start
+            // If we fail here. We re-throw the exception to force another cold start
             e.printStackTrace();
             throw new RuntimeException("Could not initialize Spring Boot application", e);
         }
