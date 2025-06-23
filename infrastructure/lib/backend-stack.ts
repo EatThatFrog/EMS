@@ -11,7 +11,7 @@ export class BackendStack extends Stack {
     const backendLambda = new lambda.Function(this, 'BackendLambda', {
       functionName: 'BackendLambda',
       runtime: lambda.Runtime.JAVA_17,
-      handler: 'com.harshita.ems.StreamLambdaHandler::handleRequest',
+      handler: 'org.harshita.ems.StreamLambdaHandler::handleRequest',
       code: lambda.Code.fromAsset('../backend/build/dist/backend.zip'),
       memorySize: 1024,
       timeout: Duration.seconds(30),
