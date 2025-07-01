@@ -9,7 +9,7 @@ export class BackendStack extends Stack {
     super(scope, id, props);
 
     const backendLambda = new lambda.Function(this, 'BackendLambda', {
-      functionName: 'BackendLambda',
+      functionName: 'EmsBackend',
       runtime: lambda.Runtime.JAVA_17,
       handler: 'org.harshita.ems.StreamLambdaHandler::handleRequest',
       code: lambda.Code.fromAsset('../backend/build/dist/backend.zip'),

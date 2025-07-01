@@ -1,4 +1,4 @@
-package org.harshita.ems;
+package org.harshita.ems.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
