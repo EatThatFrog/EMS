@@ -23,10 +23,12 @@ public class EmsItem {
     private Integer gsi2sk;
 
     @DynamoDbPartitionKey
+    @DynamoDbAttribute("PK")
     public String getPk() { return pk; }
     public void setPk(String pk) { this.pk = pk; }
 
     @DynamoDbSortKey
+    @DynamoDbAttribute("SK")
     public String getSk() { return sk; }
     public void setSk(String sk) { this.sk = sk; }
 

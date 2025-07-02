@@ -1,5 +1,6 @@
 package org.harshita.ems.dal;
 
+import lombok.extern.slf4j.Slf4j;
 import org.harshita.ems.model.EmsItem;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -10,6 +11,8 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
+
+@Slf4j
 @Repository
 public class EmsRepo {
 
@@ -30,6 +33,15 @@ public class EmsRepo {
 
     // CRUD
     public EmsItem getEmsItem(String employeeId) {
-        return emsTable.getItem(Key.builder().partitionValue(employeeId).build());
+        log.info(employeeId);
+        try {
+            EmsItem item = emsTable.getItem(Key.builder().partitionValue(employeeId).sortValue("PROFILE").build());
+            log.info(item.toString());
+            return item;
+        }
+        catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 }

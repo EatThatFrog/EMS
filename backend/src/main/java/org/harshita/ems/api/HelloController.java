@@ -1,6 +1,6 @@
 package org.harshita.ems.api;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.harshita.ems.model.EmsItem;
 import org.harshita.ems.services.EmsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,12 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Log4j2
+@Slf4j
 @RestController
 public class HelloController {
 
     @Autowired
     EmsService emsService;
-
-//    HelloController() {
-//        this.emsService = new EmsService();
-//    }
 
     @GetMapping("/")
     public Map<String, String> home() {
@@ -53,9 +49,6 @@ public class HelloController {
             log.info(employeeId);
             EmsItem item = this.emsService.getEmsItems(employeeId);
             log.info(item.toString());
-            if (item == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
             return ResponseEntity.ok(item);
         } catch (DynamoDbException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

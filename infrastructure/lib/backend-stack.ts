@@ -3,6 +3,7 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import * as iam from 'aws-cdk-lib/aws-iam'
 
 export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -16,6 +17,11 @@ export class BackendStack extends Stack {
       memorySize: 1024,
       timeout: Duration.seconds(30),
     })
+
+    backendLambda.addToRolePolicy(new iam.PolicyStatement({
+      actions: ['dynamodb:*'],
+      resources: ['*'],
+    }));
 
     new apigateway.LambdaRestApi(this, 'APIGateway', {
       restApiName: 'BackendAPI',
