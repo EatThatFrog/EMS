@@ -1,13 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+/**
+ * Smart Component that which fetch the data
+ */
+export function App() {
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState({});
+
+  async function getData() {
+    const url = "/api/employee/12345";
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      console.log(json);
+      setData(json);
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {getData()}, []);
 
   return (
     <>
+    {JSON.stringify(data)}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -31,5 +54,3 @@ function App() {
     </>
   )
 }
-
-export default App
