@@ -11,7 +11,7 @@ export function App() {
   const [data, setData] = useState({});
 
   async function getData() {
-    const url = "/api/employee/12345";
+    const url = "https://xqj4606vj5.execute-api.us-west-2.amazonaws.com/prod/employee/12345";
     try {
       const response = await fetch(url);
       if (!response.ok) {
