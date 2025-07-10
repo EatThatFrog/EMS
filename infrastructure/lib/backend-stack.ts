@@ -26,6 +26,14 @@ export class BackendStack extends Stack {
     new apigateway.LambdaRestApi(this, 'APIGateway', {
       restApiName: 'BackendAPI',
       handler: backendLambda,
+      defaultCorsPreflightOptions: {
+        allowOrigins: [
+          'http://localhost:5173',
+          'https://eatthatfrog.github.io'
+        ],
+        allowMethods: apigateway.Cors.ALL_METHODS,
+        allowHeaders: apigateway.Cors.DEFAULT_HEADERS,
+      },
     });
   }
 }
